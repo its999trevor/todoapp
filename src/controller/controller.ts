@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import {addtodo,gettodo,getcomptodo,updatetodo,checked,deletetodo,inc,dec} from "./services"
 
 
-export async function getAllTodos(req: Request, res: Response): Promise<void> {
+export async function getAllTodos(req: Request, res: Response) {
     try {
         let alltodo = await gettodo();
         let completedTodo = await getcomptodo();
@@ -16,7 +16,7 @@ export async function getAllTodos(req: Request, res: Response): Promise<void> {
     }
 }
 
-export async function addNewTodo(req: Request, res: Response): Promise<void> {
+export async function addNewTodo(req: Request, res: Response) {
     try {
         const { title } = req.body;
         let newTodo = await addtodo(title);
@@ -28,7 +28,7 @@ export async function addNewTodo(req: Request, res: Response): Promise<void> {
     }
 }
 
-export async function removeTodoById(req: Request, res: Response): Promise<void> {
+export async function removeTodoById(req: Request, res: Response) {
     try {
         let id = parseInt(req.params.id);
         console.log(id);
@@ -39,7 +39,7 @@ export async function removeTodoById(req: Request, res: Response): Promise<void>
     }
 }
 
-export async function updateTodoById(req: Request, res: Response): Promise<void> {
+export async function updateTodoById(req: Request, res: Response) {
     try {
         let id = parseInt(req.params.id);
         let data = req.body;
@@ -52,7 +52,7 @@ export async function updateTodoById(req: Request, res: Response): Promise<void>
     }
 }
 
-export async function markTodoAsChecked(req: Request, res: Response): Promise<void> {
+export async function markTodoAsChecked(req: Request, res: Response) {
     try {
         let id = parseInt(req.params.id);
         await checked(id);
@@ -63,13 +63,13 @@ export async function markTodoAsChecked(req: Request, res: Response): Promise<vo
     }
 }
 
-export async function incrementTodoById(req: Request, res: Response): Promise<void> {
+export async function incrementTodoById(req: Request, res: Response) {
     let id = parseInt(req.params.id);
     await inc(id);
     res.redirect("/");
 }
 
-export async function decrementTodoById(req: Request, res: Response): Promise<void> {
+export async function decrementTodoById(req: Request, res: Response) {
     let id = parseInt(req.params.id);
     await dec(id);
     res.redirect("/");
