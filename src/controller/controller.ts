@@ -21,7 +21,6 @@ export async function addNewTodo(req: Request, res: Response) {
         const { title } = req.body;
         let newTodo = await addtodo(title);
         console.log(newTodo);
-        res.redirect("/");
     } catch (err) {
         console.log(err);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -33,7 +32,6 @@ export async function removeTodoById(req: Request, res: Response) {
         let id = parseInt(req.params.id);
         console.log(id);
         await deletetodo(id);
-        res.redirect("/");
     } catch (err) {
         res.send(err);
     }
@@ -45,7 +43,6 @@ export async function updateTodoById(req: Request, res: Response) {
         let data = req.body;
         console.log(data);
         await updatetodo(id, data.title);
-        res.redirect("/");
     } catch (err) {
         console.log(err);
         res.send(err);
@@ -56,7 +53,6 @@ export async function markTodoAsChecked(req: Request, res: Response) {
     try {
         let id = parseInt(req.params.id);
         await checked(id);
-        res.redirect("/");
     } catch (err) {
         console.log(err);
         res.json(err);
@@ -66,11 +62,10 @@ export async function markTodoAsChecked(req: Request, res: Response) {
 export async function incrementTodoById(req: Request, res: Response) {
     let id = parseInt(req.params.id);
     await inc(id);
-    res.redirect("/");
+    
 }
 
 export async function decrementTodoById(req: Request, res: Response) {
     let id = parseInt(req.params.id);
     await dec(id);
-    res.redirect("/");
 }
